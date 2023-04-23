@@ -16,7 +16,7 @@ def generate_diff(file1, file2):
                     result[f' + {key}'] = f2[key]
         else:
             result[f' + {key}'] = f2[key]
-    # with  open('tests/fixtures/file1_types.json', 'w') as file:
+    # with open('tests/fixtures/file1_types.json', 'w') as file:
     #     json.dump(result, file, indent=2)
     return '{\n' + \
         '\n'.join([f'{key}: {value_to_str(value)}'
