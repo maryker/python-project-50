@@ -3,8 +3,7 @@ install:
 
 gendiff:
 	poetry run gendiff
-publish:
-	poetry publish --dry-run
+
 package-install:
 	python3 -m pip install --user dist/*.whl
 lint:
@@ -14,7 +13,7 @@ reinstall:
 test:
 	poetry run pytest
 test-coverage:
-	poetry run pytest --cov=hexlet_python_package --cov-report xml
+	poetry run pytest --cov=hexlet_code --cov-report xml
 selfcheck:
 	poetry check
 
