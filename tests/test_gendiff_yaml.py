@@ -1,14 +1,13 @@
 import pytest
-import json
 from hexlet_code.scripts.gendiff import generate_diff
 
 @pytest.fixture
 def file1():
-  return 'tests/fixtures/file1.json'
+  return 'tests/fixtures/file1.yml'
 
 @pytest.fixture
 def file2():
-  return 'tests/fixtures/file2.json'
+  return 'tests/fixtures/file2.yml'
 
 @pytest.fixture
 def result():
@@ -24,9 +23,5 @@ def result():
 }'''
 
 
-def test_gendiff(file1, file2, result):
+def test_yaml(file1, file2, result):
   assert generate_diff(file1, file2) == result
-  
-  
-
-
