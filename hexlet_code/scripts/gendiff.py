@@ -1,5 +1,6 @@
 import argparse
 from hexlet_code.modules.generate_diff import generate_diff
+from hexlet_code.modules.formater import stylish
 
 
 def parsing():
@@ -16,7 +17,7 @@ def parsing():
 
 def main():
     args = parsing()
-    print(generate_diff(args.first_file, args.second_file))
+    print(stylish(generate_diff(args.first_file, args.second_file)))
 
 
 if __name__ == '__main__':

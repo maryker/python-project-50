@@ -1,27 +1,30 @@
-import json
+from hexlet_code.modules.parser import parser
 
 
-def generate_diff(file1, file2):
-    f1 = json.load(open(file1))
-    f2 = json.load(open(file2))
-    result = {}
-    keys = set(f1).union(set(f2))
-    for key in sorted(keys):
-        if key in f1:
-            if f1.get(key, None) == f2.get(key, None):
-                result[f'   {key}'] = f1[key]
+def generate_diff(file1, file2): 
+    f1 = parser(file1)
+    f2 = parser(file2)
+    def inner(f1, f2):
+        result ={}
+        keys = set(f1).union(set(f2))
+        
+        for key in sorted(keys):
+            if isinstance(f1.get(key, None), dict) and isinstance(f2.get(key, None), dict):
+                result[key] = inner(f1[key], f2[key])
             else:
-                result[f' - {key}'] = f1[key]
-                if key in f2:
-                    result[f' + {key}'] = f2[key]
-        else:
-            result[f' + {key}'] = f2[key]
-    # with open('tests/fixtures/file1_types.json', 'w') as file:
-    #     json.dump(result, file, indent=2)
-    return '{\n' + \
-        '\n'.join([f'{key}: {value_to_str(value)}'
-                  for key, value in result.items()]) + '\n}'
+                result[key] = check(f1, f2, key)
+        return result
+    return inner(f1, f2)
 
+def check(val1, val2, key):
+    res_check = {}
+    if key in val1:
+        res_check['-'] = value_to_str(val1[key])
+    if key in val2:
+        res_check['+'] = value_to_str(val2[key])
+    if res_check.get('-', None) == res_check.get('+', None):
+        return {' ': val1[key]}
+    return res_check
 
 def value_to_str(value):
     if isinstance(value, bool):
@@ -29,3 +32,4 @@ def value_to_str(value):
     elif value is None:
         return 'null'
     return value
+

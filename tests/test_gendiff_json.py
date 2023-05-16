@@ -1,5 +1,6 @@
 import pytest
-from hexlet_code.scripts.gendiff import generate_diff
+from hexlet_code.modules.generate_diff import generate_diff
+from hexlet_code.modules.formater import stylish
 
 @pytest.fixture
 def file1():
@@ -12,19 +13,18 @@ def file2():
 @pytest.fixture
 def result():
   return '''{
- + empty: 
- - follow: false
-   host: hexlet.io
- + name: null
- - proxy: 123.234.53.22
- - timeout: 50
- + timeout: 20
- + verbose: true
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
 }'''
 
-
 def test_json(file1, file2, result):
-  assert generate_diff(file1, file2) == result
+   assert stylish(generate_diff(file1, file2)) == result
+
+
   
   
 
