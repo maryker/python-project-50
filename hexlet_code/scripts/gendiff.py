@@ -17,7 +17,8 @@ def parsing():
 
 def main():
     args = parsing()
-    print(stylish(generate_diff(args.first_file, args.second_file)))
+    if not args.format:
+        print(stylish(generate_diff(args.first_file, args.second_file)))
 
 
 if __name__ == '__main__':

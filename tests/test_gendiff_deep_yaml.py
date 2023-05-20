@@ -26,7 +26,7 @@ def res():
         }
         setting6: {
             doge: {
-              - wow:  
+              - wow: 
               + wow: so much
             }
             key: value
