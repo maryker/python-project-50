@@ -8,4 +8,4 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/cb1325fe2b6e3134d6da/maintainability)](https://codeclimate.com/github/maryker/python-project-50/maintainability)
 
 
-[![asciicast](https://asciinema.org/a/CIW2hssxcD8WymcmDqnv3MRxe.svg)](https://asciinema.org/a/CIW2hssxcD8WymcmDqnv3MRxe)
+[![asciicast](https://asciinema.org/a/N0kklijDHxmJVZK2FqlX3AIcH.svg)](https://asciinema.org/a/N0kklijDHxmJVZK2FqlX3AIcH)

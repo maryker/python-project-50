@@ -1,7 +1,7 @@
 from hexlet_code.modules.parser import parser
 
 
-def generate_diff(file1, file2):
+def generate_diff(file1, file2, form):
     f1 = parser(file1)
     f2 = parser(file2)
 
@@ -16,7 +16,7 @@ def generate_diff(file1, file2):
                 result[key] = check(f1, f2, key)
         return result
 
-    return inner(f1, f2)
+    return form(inner(f1, f2))
 
 
 def check(val1, val2, key):

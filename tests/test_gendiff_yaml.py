@@ -1,6 +1,6 @@
 import pytest
 from hexlet_code.modules.generate_diff import generate_diff
-from hexlet_code.modules.formater import stylish
+from hexlet_code.modules.formaters.stylish import form_stylish
 
 @pytest.fixture
 def file1():
@@ -23,4 +23,4 @@ def result():
 
 
 def test_yaml(file1, file2, result):
-  assert stylish(generate_diff(file1, file2)) == result
+  assert generate_diff(file1, file2, form_stylish) == result
