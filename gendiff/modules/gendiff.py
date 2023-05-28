@@ -7,7 +7,7 @@ from gendiff.modules.formaters.JSON import form_json
 FORMATERS = {'stylish': form_stylish, 'json': form_json, 'plain': form_plain}
 
 
-def generate_diff(file1, file2, form=FORMATERS['stylish']):
+def generate_diff(file1, file2, form='stylish'):
     f1 = parser(file1)
     f2 = parser(file2)
 
@@ -22,7 +22,7 @@ def generate_diff(file1, file2, form=FORMATERS['stylish']):
                 result[key] = check(f1, f2, key)
         return result
 
-    return form(inner(f1, f2))
+    return FORMATERS[form](inner(f1, f2))
 
 
 def check(val1, val2, key):
