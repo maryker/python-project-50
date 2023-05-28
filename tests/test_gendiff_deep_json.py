@@ -4,16 +4,17 @@ from gendiff.modules.gendiff import generate_diff
 
 @pytest.fixture
 def file3():
-  return 'tests/fixtures/file3.json'
+    return 'tests/fixtures/file3.json'
+
 
 @pytest.fixture
 def file4():
-  return 'tests/fixtures/file4.json'
+    return 'tests/fixtures/file4.json'
 
 
 @pytest.fixture
 def result():
-  return '''{
+    return '''{
     common: {
       + follow: false
         setting1: Value 1
@@ -26,7 +27,7 @@ def result():
         }
         setting6: {
             doge: {
-              - wow: 
+              - wow: ''' + '''
               + wow: so much
             }
             key: value
@@ -60,4 +61,4 @@ def result():
 
 
 def test_deep(file3, file4, result):
-  assert generate_diff(file3, file4) == result
+    assert generate_diff(file3, file4) == result
