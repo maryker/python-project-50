@@ -1,6 +1,5 @@
 import pytest
 from gendiff.modules.gendiff import generate_diff
-from gendiff.modules.formaters.stylish import form_stylish
 
 @pytest.fixture
 def file1():
@@ -23,4 +22,4 @@ def result():
 
 
 def test_yaml(file1, file2, result):
-  assert generate_diff(file1, file2, form_stylish) == result
+  assert generate_diff(file1, file2) == result

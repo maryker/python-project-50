@@ -35,5 +35,7 @@ def to_str(value):
         return str(value).lower()
     elif value is None:
         return 'null'
+    elif isinstance(value, int):
+        return value
     else:
         return f"'{value}'"

@@ -10,6 +10,7 @@ FORMATERS = {'stylish': form_stylish, 'json': form_json, 'plain': form_plain}
 def generate_diff(file1, file2, form='stylish'):
     f1 = parser(file1)
     f2 = parser(file2)
+    formater = FORMATERS[form]
 
     def inner(f1, f2):
         result = {}
@@ -22,7 +23,7 @@ def generate_diff(file1, file2, form='stylish'):
                 result[key] = check(f1, f2, key)
         return result
 
-    return FORMATERS[form](inner(f1, f2))
+    return formater(inner(f1, f2))
 
 
 def check(val1, val2, key):

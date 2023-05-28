@@ -1,6 +1,6 @@
 import pytest
 from gendiff.modules.gendiff import generate_diff
-from gendiff.modules.formaters.stylish import form_stylish
+
 
 @pytest.fixture
 def file3():
@@ -60,4 +60,4 @@ def res():
 
 
 def test_deep(file3, file4, res):
-  assert generate_diff(file3, file4, form_stylish) == res
+  assert generate_diff(file3, file4) == res
