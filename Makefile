@@ -7,7 +7,7 @@ gendiff:
 package-install:
 	python3 -m pip install --user dist/*.whl
 lint:
-	poetry run flake8 hexlet_code
+	poetry run flake8 gendiff
 reinstall:
 	python3 -m pip install --user --force-reinstall dist/*.whl
 test:

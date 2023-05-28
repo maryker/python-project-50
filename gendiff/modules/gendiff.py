@@ -1,7 +1,8 @@
 from gendiff.modules.parser import parser
+from gendiff.modules.formaters.stylish import form_stylish
 
 
-def generate_diff(file1, file2, form):
+def generate_diff(file1, file2, form=form_stylish):
     f1 = parser(file1)
     f2 = parser(file2)
 
