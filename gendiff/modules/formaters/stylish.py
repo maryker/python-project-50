@@ -7,7 +7,7 @@ def make_dict(item, depth, replace, repeat):
     result.append('{\n')
     for key, val in item.items():
         if isinstance(val, dict):
-            result.append(make_diff(val, key, depth + 1, replace, repeat) + '\n')
+            result.append(make_diff(val, key, depth+1, replace, repeat) + '\n')
         else:
             result.append(f'{replace*((depth + 1)*repeat)}{key}: {val}\n')
     result.append(f'{replace*repeat*(depth - 1)}' + '}')
