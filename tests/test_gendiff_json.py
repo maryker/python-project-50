@@ -1,6 +1,6 @@
 import pytest
-from hexlet_code.modules.gendiff import generate_diff
-from hexlet_code.modules.formaters.stylish import form_stylish
+from gendiff.modules.gendiff import generate_diff
+from gendiff.modules.formaters.stylish import form_stylish
 
 @pytest.fixture
 def file1():
