@@ -1,8 +1,13 @@
 from gendiff.modules.parser import parser
 from gendiff.modules.formaters.stylish import form_stylish
+from gendiff.modules.formaters.plain import form_plain
+from gendiff.modules.formaters.JSON import form_json
 
 
-def generate_diff(file1, file2, form=form_stylish):
+FORMATERS = {'stylish': form_stylish, 'json': form_json, 'plain': form_plain}
+
+
+def generate_diff(file1, file2, form=FORMATERS['stylish']):
     f1 = parser(file1)
     f2 = parser(file2)
 
