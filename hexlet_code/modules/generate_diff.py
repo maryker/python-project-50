@@ -22,17 +22,9 @@ def generate_diff(file1, file2, form):
 def check(val1, val2, key):
     res_check = {}
     if key in val1:
-        res_check['-'] = value_to_str(val1[key])
+        res_check['-'] = val1[key]
     if key in val2:
-        res_check['+'] = value_to_str(val2[key])
+        res_check['+'] = val2[key]
     if res_check.get('-', None) == res_check.get('+', None):
         return {' ': val1[key]}
     return res_check
-
-
-def value_to_str(value):
-    if isinstance(value, bool):
-        return str(value).lower()
-    elif value is None:
-        return 'null'
-    return value

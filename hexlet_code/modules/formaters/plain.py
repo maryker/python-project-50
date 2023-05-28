@@ -1,17 +1,17 @@
-def form_plain(dictt, start=''):
+def form_plain(diff, start=''):
     result = []
 
     def inner(d, path):
         for key in d:
             if isinstance(d[key], dict):
                 new_path = f'{path}.{key}' if path != '' else key
-                if any(k in ['-', '+', ' '] for k in dictt[key]):
-                    result.append(make_diff(dictt[key], new_path))
+                if any(k in ['-', '+', ' '] for k in diff[key]):
+                    result.append(make_diff(diff[key], new_path))
                 else:
-                    result.append(form_plain(dictt[key], new_path))
+                    result.append(form_plain(diff[key], new_path))
         return '\n'.join(filter(lambda x: x, result))
 
-    return inner(dictt, start)
+    return inner(diff, start)
 
 
 def make_diff(item, val):
@@ -31,7 +31,9 @@ def make_diff(item, val):
 def to_str(value):
     if isinstance(value, dict):
         return '[complex value]'
-    if value == 'true' or value == 'false' or value == 'null':
-        return value
+    elif isinstance(value, bool):
+        return str(value).lower()
+    elif value is None:
+        return 'null'
     else:
         return f"'{value}'"

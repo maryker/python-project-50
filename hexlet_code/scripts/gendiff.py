@@ -2,6 +2,7 @@ import argparse
 from hexlet_code.modules.generate_diff import generate_diff
 from hexlet_code.modules.formaters.stylish import form_stylish
 from hexlet_code.modules.formaters.plain import form_plain
+from hexlet_code.modules.formaters.JSON import form_json
 
 
 def parsing():
@@ -22,6 +23,8 @@ def main():
         print(generate_diff(args.first_file, args.second_file, form_stylish))
     elif args.format == 'plain':
         print(generate_diff(args.first_file, args.second_file, form_plain))
+    elif args.format == 'json':
+        print(generate_diff(args.first_file, args.second_file, form_json))
 
 
 if __name__ == '__main__':

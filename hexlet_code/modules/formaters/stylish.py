@@ -31,5 +31,13 @@ def to_str(item, depth, replace, repeat):
     if isinstance(item, dict):
         return make_dict(item, depth, replace, repeat)
     else:
-        result.append(str(item))
+        result.append(value_to_str(item))
     return ''.join(result)
+
+
+def value_to_str(value):
+    if isinstance(value, bool):
+        return str(value).lower()
+    elif value is None:
+        return 'null'
+    return str(value)
