@@ -1,5 +1,5 @@
 import pytest
-from hexlet_code.modules.generate_diff import generate_diff
+from hexlet_code.modules.gendiff import generate_diff
 from hexlet_code.modules.formaters.stylish import form_stylish
 
 @pytest.fixture
