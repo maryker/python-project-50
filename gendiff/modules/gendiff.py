@@ -1,4 +1,4 @@
-from hexlet_code.modules.parser import parser
+from gendiff.modules.parser import parser
 
 
 def generate_diff(file1, file2, form):
