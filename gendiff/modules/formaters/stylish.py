@@ -7,10 +7,10 @@ def make_dict(item, depth, replace, repeat):
     result.append('{\n')
     for key, val in item.items():
         if isinstance(val, dict):
-            result.append(make_diff(val, key, depth+1, replace, repeat) + '\n')
+            result.append(make_diff(val, key, depth + 1, replace, repeat) + '\n')
         else:
-            result.append(f'{replace*((depth+1)*repeat)}{key}: {val}\n')
-    result.append(f'{replace*repeat*(depth-1)}'+'}')
+            result.append(f'{replace*((depth + 1)*repeat)}{key}: {val}\n')
+    result.append(f'{replace*repeat*(depth - 1)}'+'}')
     return ''.join(result)
 
 
@@ -18,11 +18,11 @@ def make_diff(dict, val, depth, replace, repeat):
     new_diff = []
     for key in dict:
         if key in ['-', '+', ' ']:
-            new_diff.append(f'{replace*(depth*repeat-2)}{key} {val}: '
+            new_diff.append(f'{replace*(depth*repeat - 2)}{key} {val}: '
                             + to_str(dict[key], depth+1, replace, repeat))
     if not any(k in ['-', ' ', '+'] for k in dict):
         new_diff.append(f'{replace*(depth*repeat)}{val}: '
-                        + to_str(dict, depth+1, replace, repeat))
+                        + to_str(dict, depth + 1, replace, repeat))
     return '\n'.join(new_diff)
 
 
