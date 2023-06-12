@@ -2,7 +2,7 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = "generates diff of two files"
-authors = ["maryker mashalipatowa@yandex.ru>"]
+authors = ["maryker <mashalipatowa@yandex.ru>"]
 readme = "README.md"
 packages = [{include = "gendiff"}]
 
