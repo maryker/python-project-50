@@ -1,5 +1,6 @@
 import pytest
 from gendiff.modules.gendiff import generate_diff
+from tests.fixtures.fixture_plain import result
 
 
 @pytest.fixture
@@ -12,17 +13,5 @@ def file2():
     return 'tests/fixtures/file2.json'
 
 
-@pytest.fixture
-def result():
-    return '''{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}'''
-
-
-def test_json(file1, file2, result):
+def test_json(file1, file2):
     assert generate_diff(file1, file2) == result
