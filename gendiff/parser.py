@@ -9,14 +9,16 @@ except ImportError:
 
 def parser(file):
     if file.endswith('.json'):
-        return pars_json(file)
+        with open(file) as f:
+            return parse_json(f)
     elif file.endswith('.yaml') or file.endswith('.yml'):
-        return pars_yaml(file)
+        with open(file) as f:
+            return parse_yaml(f)
 
 
-def pars_json(file):
-    return json.load(open(file))
+def parse_json(file):
+    return json.load(file)
 
 
-def pars_yaml(file):
-    return load(open(file), Loader=Loader)
+def parse_yaml(file):
+    return load(file, Loader=Loader)

@@ -1,8 +1,8 @@
-from gendiff.modules.parser import parser
-from gendiff.modules.formaters.stylish import form_stylish
-from gendiff.modules.formaters.plain import form_plain
-from gendiff.modules.formaters.JSON import form_json
-from gendiff.modules.make_diff import make_diff
+from gendiff.parser import parser
+from gendiff.formaters.stylish import form_stylish
+from gendiff.formaters.plain import form_plain
+from gendiff.formaters.JSON import form_json
+from gendiff.make_diff import make_diff
 
 
 FORMATERS = {'stylish': form_stylish, 'json': form_json, 'plain': form_plain}

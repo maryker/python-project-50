@@ -1,8 +1,8 @@
 import argparse
-from gendiff.modules.gendiff import generate_diff
+from gendiff.generate_diff import generate_diff
 
 
-def parsing():
+def get_args():
     parser = argparse.ArgumentParser(prog='gendiff',
                                      description='Compares two configuration \
                                      files and shows a difference.')
@@ -14,7 +14,7 @@ def parsing():
 
 
 def main():
-    args = parsing()
+    args = get_args()
     print(generate_diff(args.first_file, args.second_file, args.format))
 
 
