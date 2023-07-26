@@ -1,4 +1,5 @@
 import json
+import os
 
 from yaml import load
 try:
@@ -7,18 +8,14 @@ except ImportError:
     from yaml import Loader
 
 
-def parser(file):
-    if file.endswith('.json'):
-        with open(file) as f:
-            return parse_json(f)
-    elif file.endswith('.yaml') or file.endswith('.yml'):
-        with open(file) as f:
-            return parse_yaml(f)
+def parse(file):
+    extention = os.path.splitext(file)[1]
+    with open(file, 'r') as f:
+        return read_file(f, extention)
 
 
-def parse_json(file):
-    return json.load(file)
-
-
-def parse_yaml(file):
-    return load(file, Loader=Loader)
+def read_file(file, extention):
+    if extention == '.json':
+        return json.load(file)
+    elif extention == '.yaml' or extention == '.yml':
+        return load(file, Loader=Loader)
