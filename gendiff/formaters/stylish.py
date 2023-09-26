@@ -13,13 +13,14 @@ def make_dict(item, depth, replace, repeat):
             if 'type' in val:
                 if val['type'] == 'deep':
                     result.append(f'{replace*((depth*repeat)-2)}  {key}: '
-                                  + make_dict(val['value'], depth+1,
+                                  + make_dict(val['value'], depth + 1,
                                               replace, repeat) + '\n')
                 else:
                     result.append(make_diff(val, key, depth, replace, repeat))
             else:
                 result.append(f'{replace*(depth*repeat)}{key}: '
-                              + make_dict(val, depth+1, replace, repeat) + '\n')
+                              + make_dict(val, depth + 1, replace, repeat)
+                              + '\n')
         else:
             result.append(f'{replace*(depth*repeat)}{key}: {val_to_str(val)}\n')
     result.append(f'{replace*repeat*(depth-1)}' + '}')
@@ -29,16 +30,16 @@ def make_dict(item, depth, replace, repeat):
 def make_diff(value, key, depth, replace, repeat):
     result = []
     if value['type'] in FORMS:
-        result.append(f"{replace*((depth*repeat)-2)}" +
-                      f"{FORMS[value['type']]} {key}: "
-                      + to_str(value['value'], depth+1, replace, repeat)
+        result.append(f"{replace*((depth*repeat)-2)}"
+                      + f"{FORMS[value['type']]} {key}: "
+                      + to_str(value['value'], depth + 1, replace, repeat)
                       + "\n")
     else:
         result.append(f"{replace*((depth*repeat)-2)}- {key}: "
-                      + to_str(value['value'][0], depth+1, replace, repeat)
+                      + to_str(value['value'][0], depth + 1, replace, repeat)
                       + "\n")
         result.append(f"{replace*((depth*repeat)-2)}+ {key}: "
-                      + to_str(value['value'][1], depth+1, replace, repeat)
+                      + to_str(value['value'][1], depth + 1, replace, repeat)
                       + "\n")
     return ''.join(result)
 
