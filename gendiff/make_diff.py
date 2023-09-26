@@ -27,8 +27,3 @@ def check(val1, val2, key):
         res_check['type'] = 'added'
         res_check['value'] = val2[key]
     return res_check
-
-
-import json
-print(make_diff(json.load(open('tests/fixtures/file1.json')), json.load(open('tests/fixtures/file2.json'))))
-

@@ -2,13 +2,12 @@ def form_plain(diff, start=''):
     result = []
 
     def inner(d, path):
-        for key in d:
-            if isinstance(d[key], dict):
-                new_path = f'{path}.{key}' if path != '' else key
-                if any(k in ['-', '+', ' '] for k in diff[key]):
-                    result.append(make_diff(diff[key], new_path))
-                else:
-                    result.append(form_plain(diff[key], new_path))
+        for key, val in d.items():
+            new_path = f'{path}.{key}' if path != '' else key
+            if val['type'] == 'deep':
+                result.append(form_plain(val['value'], new_path))
+            else:
+                result.append(make_diff(val, new_path))
         return '\n'.join(filter(lambda x: x, result))
 
     return inner(diff, start)
@@ -16,15 +15,14 @@ def form_plain(diff, start=''):
 
 def make_diff(item, val):
     result = []
-    if '-' in item and '+' in item:
+    if item['type'] == 'changed':
         return f"Property '{val}' was updated. "\
-            f"From {to_str(item['-'])} to {to_str(item['+'])}"
-    for key in item:
-        if key == '+':
-            result.append(f"Property '{val}' was added with value: "
-                          f"{to_str(item[key])}")
-        if key == '-':
-            result.append(f"Property '{val}' was removed")
+            f"From {to_str(item['value'][0])} to {to_str(item['value'][1])}"
+    elif item['type'] == 'added':
+        result.append(f"Property '{val}' was added with value: "
+                      f"{to_str(item['value'])}")
+    elif item['type'] == 'deleted':
+        result.append(f"Property '{val}' was removed")
     return ''.join(result)
 
 
