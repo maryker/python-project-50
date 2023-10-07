@@ -20,6 +20,8 @@ def make_diff(item, val):
         return f"Property '{val}' was removed"
     elif item['type'] == 'deep':
         return form_plain(item['value'], val)
+    elif item['type'] == 'same':
+        pass
     else:
         raise ValueError('Incorrect type')
 
