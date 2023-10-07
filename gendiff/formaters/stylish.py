@@ -2,7 +2,7 @@ FORMS = {'deleted': '-', 'added': '+', 'same': ' '}
 
 
 def form_stylish(value, replace=' ', repeat=4):
-    return to_str(value, 1, replace, repeat)
+    return check_for_dict(value, 1, replace, repeat)
 
 
 def make_dict(item, depth, replace, repeat):
@@ -11,49 +11,48 @@ def make_dict(item, depth, replace, repeat):
     for key, val in item.items():
         if isinstance(val, dict):
             if 'type' in val:
-                if val['type'] == 'deep':
-                    result.append(f'{replace*((depth*repeat)-2)}  {key}: '
-                                  + make_dict(val['value'], depth + 1,
-                                              replace, repeat) + '\n')
-                else:
-                    result.append(make_diff(val, key, depth, replace, repeat))
+                result.append(make_diff(val, key, depth, replace, repeat))
             else:
                 result.append(f'{replace*(depth*repeat)}{key}: '
                               + make_dict(val, depth + 1, replace, repeat)
                               + '\n')
         else:
-            result.append(f'{replace*(depth*repeat)}{key}: {val_to_str(val)}\n')
+            result.append(f'{replace*(depth*repeat)}{key}: {to_str(val)}\n')
     result.append(f'{replace*repeat*(depth-1)}' + '}')
     return ''.join(result)
 
 
 def make_diff(value, key, depth, replace, repeat):
     result = []
-    if value['type'] in FORMS:
+    if value['type'] == 'deep':
+        result.append(f'{replace*((depth*repeat)-2)}  {key}: '
+                      + make_dict(value['value'], depth + 1, replace, repeat)
+                      + '\n')
+    elif value['type'] in FORMS:
         result.append(f"{replace*((depth*repeat)-2)}"
                       + f"{FORMS[value['type']]} {key}: "
-                      + to_str(value['value'], depth + 1, replace, repeat)
-                      + "\n")
-    else:
+                      + check_for_dict(value['value'], depth + 1,
+                                       replace, repeat) + "\n")
+    elif value['type'] == 'changed':
         result.append(f"{replace*((depth*repeat)-2)}- {key}: "
-                      + to_str(value['value'][0], depth + 1, replace, repeat)
-                      + "\n")
+                      + check_for_dict(value['value'][0], depth + 1,
+                                       replace, repeat) + "\n")
         result.append(f"{replace*((depth*repeat)-2)}+ {key}: "
-                      + to_str(value['value'][1], depth + 1, replace, repeat)
-                      + "\n")
+                      + check_for_dict(value['value'][1], depth + 1,
+                                       replace, repeat) + "\n")
+    else:
+        raise ValueError('Incorrect type')
     return ''.join(result)
 
 
-def to_str(item, depth, replace, repeat):
-    result = []
+def check_for_dict(item, depth, replace, repeat):
     if isinstance(item, dict):
         return make_dict(item, depth, replace, repeat)
     else:
-        result.append(val_to_str(item))
-    return ''.join(result)
+        return to_str(item)
 
 
-def val_to_str(value):
+def to_str(value):
     if isinstance(value, bool):
         return str(value).lower()
     elif value is None:
